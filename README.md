@@ -42,6 +42,26 @@ SFINCS-Compound-Flooding-Nonlinearity-and-Shapley-Value-based-Relative-Contribut
 | **Discharge (Dis)**   | USGS Stream Gauges                                   | 15-minute intervals              | 8 inflow points matched to rivers      |
 | **Precipitation (Precip)** | ERA5 (ECMWF Reanalysis)                            | ~31 km, hourly                   | Downscaled hourly rainfall globally                                   |
 
+<sub>
+Abbreviations:  
+DEM = Digital Elevation Model,  
+CUDEM = Continuously Updated Digital Elevation Model,  
+CRM = Coastal Relief Model,  
+NLCD = National Land Cover Database,  
+GCN = Global Curve Number,  
+CCI = Climate Change Initiative,  
+HYSOGs = Global Hydrologic Soil Groups (HYSOGs250m),  
+MERIT = Multi-Error-Removed Improved-Terrain Hydro,  
+HYCOM = HYbrid Coordinate Ocean Model,  
+TPXO = Tidal Prediction using TOPEX/POSEIDON,  
+NHC = National Hurricane Center,  
+JTWC = Joint Typhoon Warning Center,  
+WES = Wind Enhance Scheme,  
+USGS = United States Geological Survey,  
+ERA5 = ECMWF Reanalysis 5th Generation,  
+ECMWF = European Centre for Medium-Range Weather Forecasts.  
+</sub>
+
 ---
 
 ## 🌐 Data Sources
