@@ -22,7 +22,7 @@ SFINCS-Compound-Flooding-Nonlinearity-and-Shapley-Value-based-Relative-Contribut
 │   ├── 5_Nonlinearity_maps.m
 │   ├── 6_Nonlinearity_timeseries.m
 │   ├── 7_Shapley_Values_maps.m
-│   └── 8_Shapley_values_timeseries.m
+│   └── 8_Shapley_Values_timeseries.m
 │
 ├── LICENSE                       # Open-source license
 └── README.md                     # Project overview
@@ -109,7 +109,7 @@ All datasets used in this study are publicly available from the following source
 | **5_Nonlinearity_maps.m**        | Computes and visualizes spatial nonlinearity maps using SFINCS output. Calculates nonlinear interaction effects based on marginal water contribution. |
 | **6_Nonlinearity_timeseries.m**  | Extracts and plots time series of nonlinearity at NOAA, USGS, and selected locations for all-driver simulations. |
 | **7_Shapley_Values_maps.m**      | Calculates Shapley values for all 15 driver combinations, then normalizes and maps the spatial distribution of each driver’s contribution. |
-| **8_Shapley_values_timeseries.m**| Computes and plots temporal evolution of Shapley values for all four flood drivers at 21 observation locations. |
+| **8_Shapley_Values_timeseries.m**| Computes and plots temporal evolution of Shapley values for all four flood drivers at 21 observation locations. |
 
 ---
 
@@ -319,7 +319,7 @@ pcolor(x, y, Norm_phi_WL); shading interp; caxis([-1, 1]);
 ### Shapley Value Time Series (MATLAB)
 
 ```matlab
-% 8_Shapley_values_timeseries.m
+% 8_Shapley_Values_timeseries.m
 
 utm_coords = [...]; % 21 locations
 phi_values = zeros(21, num_time_steps, 5);
