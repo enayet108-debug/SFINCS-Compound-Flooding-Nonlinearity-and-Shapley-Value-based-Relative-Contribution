@@ -1,4 +1,4 @@
-# SFINCS Compound Flooding: Nonlinearity and Shapley Value-based Relative Contribution
+# Compound Flooding using SFINCS: Nonlinearity and Shapley Value-based Relative Contribution
 This repository provides the complete workflow and analysis codes for quantifying *spatiotemporal nonlinearity* and *Shapley-value based relative contribution* of four compound flood drivers: 
 - Offshore Water Level (WL)
 - Wind-Pressure (WP)
