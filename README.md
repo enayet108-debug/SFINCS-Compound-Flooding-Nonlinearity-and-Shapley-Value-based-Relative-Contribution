@@ -13,16 +13,16 @@ The case study is based on *Hurricane Beryl (2024)* in the *Houston–Galveston 
 ```text
 SFINCS-Compound-Flooding-Nonlinearity-and-Shapley-Value-based-Relative-Contribution/
 ├── notebooks/                     # Python notebooks for preprocessing
-│   ├── HydroMT_Preprocessing_for_SFINCS.ipynb
-│   └── Precipitation_Code.ipynb
+│   ├── 1_HydroMT_Preprocessing_for_SFINCS.ipynb
+│   └── 2_Precipitation_Code.ipynb
 │
 ├── matlab/                        # MATLAB scripts for analysis
-│   ├── 1_Preprocessing_HYCOM_Data.m
-│   ├── 2_HYCOM_and_TPXO.m
-│   ├── 3_Nonlinearity_maps.m
-│   ├── 4_Nonlinearity_timeseries.m
-│   ├── 5_Shapley_Values_maps.m
-│   └── 6_Shapley_values_timeseries.m
+│   ├── 3_Preprocessing_HYCOM_Data.m
+│   ├── 4_HYCOM_and_TPXO.m
+│   ├── 5_Nonlinearity_maps.m
+│   ├── 6_Nonlinearity_timeseries.m
+│   ├── 7_Shapley_Values_maps.m
+│   └── 8_Shapley_values_timeseries.m
 │
 ├── LICENSE                       # Open-source license
 └── README.md                     # Project overview
@@ -102,14 +102,14 @@ All datasets used in this study are publicly available from the following source
 
 | File Name                               | Description |
 |----------------------------------------|-------------|
-| **HydroMT_Preprocessing_for_SFINCS.ipynb** | Python notebook using HydroMT plugin to prepare gridded input files (e.g., DEM, land cover, roughness, subgrid, etc.) required for the SFINCS model setup. |
-| **Precipitation_Code.ipynb**  | Python notebook for processing ERA5 precipitation data. Extracts and formats rainfall inputs to be used in the SFINCS rainfall forcing file. |
-| **1_Preprocessing_HYCOM_Data.m** | Extracts and processes HYCOM non-tidal sea surface height data for selected offshore points. Outputs time series for use as offshore boundary conditions in SFINCS. |
-| **2_HYCOM_and_TPXO.m**           | Combines non-tidal water levels from HYCOM with tidal constituents from TPXO. Produces total offshore water level boundary time series for 29 locations. |
-| **3_Nonlinearity_maps.m**        | Computes and visualizes spatial nonlinearity maps using SFINCS output. Calculates nonlinear interaction effects based on marginal water contribution. |
-| **4_Nonlinearity_timeseries.m**  | Extracts and plots time series of nonlinearity at NOAA, USGS, and selected locations for all-driver simulations. |
-| **5_Shapley_Values_maps.m**      | Calculates Shapley values for all 15 driver combinations, then normalizes and maps the spatial distribution of each driver’s contribution. |
-| **6_Shapley_values_timeseries.m**| Computes and plots temporal evolution of Shapley values for all four flood drivers at 21 observation locations. |
+| **1_HydroMT_Preprocessing_for_SFINCS.ipynb** | Python notebook using HydroMT plugin to prepare gridded input files (e.g., DEM, land cover, roughness, subgrid, etc.) required for the SFINCS model setup. |
+| **2_Precipitation_Code.ipynb**  | Python notebook for processing ERA5 precipitation data. Extracts and formats rainfall inputs to be used in the SFINCS rainfall forcing file. |
+| **3_Preprocessing_HYCOM_Data.m** | Extracts and processes HYCOM non-tidal sea surface height data for selected offshore points. Outputs time series for use as offshore boundary conditions in SFINCS. |
+| **4_HYCOM_and_TPXO.m**           | Combines non-tidal water levels from HYCOM with tidal constituents from TPXO. Produces total offshore water level boundary time series for 29 locations. |
+| **5_Nonlinearity_maps.m**        | Computes and visualizes spatial nonlinearity maps using SFINCS output. Calculates nonlinear interaction effects based on marginal water contribution. |
+| **6_Nonlinearity_timeseries.m**  | Extracts and plots time series of nonlinearity at NOAA, USGS, and selected locations for all-driver simulations. |
+| **7_Shapley_Values_maps.m**      | Calculates Shapley values for all 15 driver combinations, then normalizes and maps the spatial distribution of each driver’s contribution. |
+| **8_Shapley_values_timeseries.m**| Computes and plots temporal evolution of Shapley values for all four flood drivers at 21 observation locations. |
 
 ---
 
@@ -117,10 +117,10 @@ All datasets used in this study are publicly available from the following source
 
 ### 1. Preprocessing
 
-- Use `HydroMT_Preprocessing_for_SFINCS.ipynb` to generate SFINCS input rasters (DEM, land cover, Manning's n, infiltration, river mask, subgrid) using HydroMT plugins.
-- Process ERA5 precipitation data using `Precipitation_Code.ipynb` to create rainfall input time series for the SFINCS model.
-- Extract non-tidal sea surface height data from HYCOM using `1_Preprocessing_HYCOM_Data.m`.
-- Combine HYCOM (non-tidal) and TPXO (tidal) datasets using `2_HYCOM_and_TPXO.m` to create complete offshore water level boundary inputs for 29 locations.
+- Use `1_HydroMT_Preprocessing_for_SFINCS.ipynb` to generate SFINCS input rasters (DEM, land cover, Manning's n, infiltration, river mask, subgrid) using HydroMT plugins.
+- Process ERA5 precipitation data using `2_Precipitation_Code.ipynb` to create rainfall input time series for the SFINCS model.
+- Extract non-tidal sea surface height data from HYCOM using `3_Preprocessing_HYCOM_Data.m`.
+- Combine HYCOM (non-tidal) and TPXO (tidal) datasets using `4_HYCOM_and_TPXO.m` to create complete offshore water level boundary inputs for 29 locations.
 
 ### 2. Compound Flood Simulation
 
@@ -129,14 +129,14 @@ All datasets used in this study are publicly available from the following source
 
 ### 3. Nonlinearity Analysis
 
-- Compute spatial maps of nonlinearity using `3_Nonlinearity_maps.m` by comparing nonlinear vs. linear water level superpositions.
-- Extract and visualize time series of nonlinearity at NOAA, USGS, and selected locations using `4_Nonlinearity_timeseries.m`.
+- Compute spatial maps of nonlinearity using `5_Nonlinearity_maps.m` by comparing nonlinear vs. linear water level superpositions.
+- Extract and visualize time series of nonlinearity at NOAA, USGS, and selected locations using `6_Nonlinearity_timeseries.m`.
 
 ### 4. Shapley Value-Based Contribution
 
-- Calculate Shapley values from all possible driver combinations using `5_Shapley_Values_maps.m`.
+- Calculate Shapley values from all possible driver combinations using `7_Shapley_Values_maps.m`.
 - Normalize and map spatial distribution of each flood driver's relative contribution.
-- Analyze temporal variation in driver dominance using `6_Shapley_values_timeseries.m`.
+- Analyze temporal variation in driver dominance using `8_Shapley_values_timeseries.m`.
 
 ---
 
@@ -145,7 +145,7 @@ All datasets used in this study are publicly available from the following source
 ### HydroMT Preprocessing (Python)
 
 ```python
-#HydroMT_Preprocessing_for_SFINCS.ipynb
+#1_HydroMT_Preprocessing_for_SFINCS.ipynb
 
 from hydromt_sfincs import SfincsModel
 
@@ -172,7 +172,7 @@ _ = sf.plot_basemap(plot_region=True, bmap="sat", figsize=(5,20), zoomlevel=10)
 ### Preprocessing Precipitation (Python)
 
 ```python
-#Precipitation_Code.ipynb
+#2_Precipitation_Code.ipynb
 
 root = "era5_hourly_data_beryl.nc"
 
@@ -199,7 +199,7 @@ n1_zsmax = xr.DataArray(
 ### Preprocessing HYCOM Data (MATLAB)
 
 ```matlab
-% 1_Preprocessing_HYCOM_Data.m
+% 3_Preprocessing_HYCOM_Data.m
 
 fpath = ('ssh_2024_HYCOM.nc4');
 ncdisp(fpath);
@@ -234,7 +234,7 @@ fclose(fileID);
 ### Combine HYCOM and TPXO Water Levels (MATLAB)
 
 ```matlab
-% 2_HYCOM_and_TPXO.m
+% 4_HYCOM_and_TPXO.m
 
 wl_data = load('sfincs_wl_output.txt');
 wl_time = wl_data(:, 1);
@@ -265,7 +265,7 @@ fclose(fileID);
 ### Nonlinearity Map Generation (MATLAB)
 
 ```matlab
-% 3_Nonlinearity_maps.m
+% 5_Nonlinearity_maps.m
 
 file_combinations = {
     'sfincs_map_WL+Storm.nc', {'sfincs_map_WL_Only.nc', 'sfincs_map_Storm_Only.nc'};
@@ -282,7 +282,7 @@ h_combined(zb < 0) = max(zsmax, [], 3)(zb < 0);
 ### Nonlinearity Time Series (MATLAB)
 
 ```matlab
-% 4_Nonlinearity_timeseries.m
+% 6_Nonlinearity_timeseries.m
 
 x = ncread('sfincs_map_WL+Storm+Dis+Precipitation.nc', 'x');
 y = ncread('sfincs_map_WL+Storm+Dis+Precipitation.nc', 'y');
@@ -305,7 +305,7 @@ end
 ### Shapley Value Map (MATLAB)
 
 ```matlab
-% 5_Shapley_Values_maps.m
+% 7_Shapley_Values_maps.m
 
 h_WL = read_depth('sfincs_map_WL_Only.nc');
 h_WindPressure = read_depth('sfincs_map_Storm_Only.nc');
@@ -319,7 +319,7 @@ pcolor(x, y, Norm_phi_WL); shading interp; caxis([-1, 1]);
 ### Shapley Value Time Series (MATLAB)
 
 ```matlab
-% 6_Shapley_values_timeseries.m
+% 8_Shapley_values_timeseries.m
 
 utm_coords = [...]; % 21 locations
 phi_values = zeros(21, num_time_steps, 5);
