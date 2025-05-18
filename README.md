@@ -136,7 +136,7 @@ All datasets used in this study are publicly available from the following source
 
 - Calculate Shapley values from all possible driver combinations using `7_Shapley_Values_maps.m`.
 - Normalize and map spatial distribution of each flood driver's relative contribution.
-- Analyze temporal variation in driver dominance using `8_Shapley_values_timeseries.m`.
+- Analyze temporal variation in driver dominance using `8_Shapley_Values_timeseries.m`.
 
 ---
 
