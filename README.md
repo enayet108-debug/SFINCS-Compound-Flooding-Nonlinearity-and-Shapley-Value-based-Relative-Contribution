@@ -96,7 +96,7 @@ ECMWF = European Centre for Medium-Range Weather Forecasts.
 ## 📂 Input Files Overview
 
 Example input files can be downloaded from:
-[SFINCS Spatiotemporal Analysis Zenodo](https://zenodo.org/doi/10.5281/zenodo.15460823)
+[SFINCS Spatiotemporal Analysis Zenodo](https://doi.org/10.5281/zenodo.15460823)
 
 | Related Item              | File Name                        | File Type | Resolution                 | Description |
 |---------------------------|----------------------------------|-----------|----------------------------|-------------|
