@@ -12,11 +12,11 @@ The case study is based on *Hurricane Beryl (2024)* in the *Houston–Galveston 
 
 ```text
 SFINCS-Compound-Flooding-Nonlinearity-and-Shapley-Value-based-Relative-Contribution/
-├── notebooks/                     # Python notebooks for preprocessing
+├── notebooks/                            # Python notebooks for preprocessing
 │   ├── 1_HydroMT_Preprocessing_for_SFINCS.ipynb
 │   └── 2_Precipitation_Code.ipynb
 │
-├── matlab/                        # MATLAB scripts for analysis
+├── matlab/                               # MATLAB scripts for analysis
 │   ├── 3_Preprocessing_HYCOM_Data.m
 │   ├── 4_HYCOM_and_TPXO.m
 │   ├── 5_Nonlinearity_maps.m
@@ -24,8 +24,38 @@ SFINCS-Compound-Flooding-Nonlinearity-and-Shapley-Value-based-Relative-Contribut
 │   ├── 7_Shapley_Values_maps.m
 │   └── 8_Shapley_Values_timeseries.m
 │
-├── LICENSE                       # Open-source license
-└── README.md                     # Project overview
+├── input/                                # Input files for SFINCS model
+│   ├── dem3.tif
+│   ├── crm.tif
+│   ├── tx_man400_utm.tif
+│   ├── GCN250_ARCI.tif
+│   ├── GCN250_ARCII.tif
+│   ├── GCN250_ARCIII.tif
+│   ├── flwdir.tif
+│   ├── rivwth.tif
+│   ├── uparea.tif
+│   ├── sfincs_grid_region.shp
+│   ├── ssh_2024_2.nc4
+│   ├── Beryl.spw
+│   ├── Beryl.pol
+│   ├── sfincs.bca
+│   ├── sfincs.bnd
+│   ├── sfincs.bzs
+│   ├── sfincs.dis
+│   ├── sfincs.ind
+│   ├── sfincs.inp
+│   ├── sfincs.msk
+│   ├── sfincs.obs
+│   ├── sfincs.scs
+│   ├── sfincs.src
+│   ├── sfincs_subgrid.nc
+│   ├── sfincs_map.nc
+│   ├── sfincs_his.nc
+│   ├── era5_hourly_data_beryl.nc
+│   └── Precip_2d.nc
+│
+├── LICENSE                               # Open-source license
+└── README.md                             # Project overview
 
 ```
 ---
@@ -63,6 +93,41 @@ ECMWF = European Centre for Medium-Range Weather Forecasts.
 </sub>
 
 ---
+## 📂 Input Files Overview
+
+Example input files can be downloaded from:
+[SFINCS Spatiotemporal Analysis Zenodo](https://zenodo.org/doi/10.5281/zenodo.15460823)
+
+| Related Item              | File Name                        | File Type | Resolution                 | Description |
+|---------------------------|----------------------------------|-----------|----------------------------|-------------|
+| Digital Elevation Model   | dem3.tif                         | TIFF      | 3 m (coast), 10 m (offshore) | A 32-bit floating point TIFF raster based on CUDEM. The uncompressed file size is 13.45 GB, contains no color map with basic mensuration capabilities, and 8 pyramid levels for faster rendering. |
+| Digital Elevation Model   | crm.tif                          | TIFF      | 30 m                       | A 32-bit floating point TIFF raster from the CRM bathymetry datasets. The uncompressed size is 2.25 GB, with no colormap, and includes 5 pyramid levels for efficient rendering and basic mensuration capabilities. |
+| Manning’s Roughness       | tx_man400_utm.tif                | TIFF      | 30 m                       | A TIFF raster file composed of 64-bit double-precision values. The file has an uncompressed size of 5.67 MB, contains no colormap or compression, uses -9999 as the NoData value, supports basic mensuration capabilities, and includes arbitrary pyramid levels for improved rendering performance. |
+| Infiltration              | GCN250_ARCI/ARCII/ARCIII.tif     | TIFF      | 250 m                      | A TIFF raster file composed of 8-bit unsigned integer values. The file has an uncompressed size of 10.81 GB, has no colormap or pyramids, designates 255 as the NoData value, and supports basic mensuration capabilities. |
+| Flow Direction            | flwdir                           | TIFF      | ~90 m (3 arc-sec)          | A MERIT Hydro derived flow direction raster from the latest elevation data (MERIT DEM) and water body datasets (G1WBM, GSWO, and OpenStreetMap). Contains a single 8-bit unsigned band, and no colormap, no compression, a NoData value of 255, and includes 4 pyramid levels with nearest neighbor resampling for enhanced display performance, along with basic mensuration capabilities. |
+| River Width               | rivwth                           | TIFF      | ~90 m (3 arc-sec)          | Contains a single 32-bit floating point band. The file is uncompressed with a size of 549.39 MB, has no colormap, includes 4 pyramid levels with nearest neighbor resampling, and supports basic mensuration capabilities. |
+| Upstream Drainage Area    | uparea                           | TIFF      | ~90 m (3 arc-sec)          | A single 32-bit floating point band with an uncompressed size of 549.39 MB, no compression or colormap, and includes 4 pyramid levels with nearest neighbor resampling for improved visualization, along with basic mensuration capabilities. |
+| Study Area                | sfincs_grid_region.shp           | SHP       | N/A                        | A shapefile representing a rectangular study area encompassing the Houston–Galveston region of Texas, USA. |
+| Offshore Water Level      | ssh_2024_2.nc4                   | netCDF4   | ~8 km (3-hourly)           | Downloaded HYCOM sea surface elevation data extracted for the coordinates specified in the ‘sfincs.bnd’ file at a 3-hourly interval. |
+| Wind-Pressure (Hurricane) | Beryl.spw                        | SPW       | 6-hourly                   | An NHC-JTWC best track data for Hurricane Beryl as a spiderweb file, including wind speed, direction, and pressure. Coordinates: meters in projected UTM zone, data: m/s, wind_from_direction in degrees, p_drop in Pa. |
+| Wind-Pressure (Hurricane) | Beryl.pol                        | POL       | 6-hourly                   | A polygon-based file representing the Hurricane’s best track. |
+| SFINCS Input              | sfincs.bca                       | BCA       | N/A                        | A file carrying the astronomical tide constituents’ amplitude and phase information. |
+| SFINCS Input              | sfincs.bnd                       | BND       | N/A                        | To specify water-level time-series to the boundary cells (msk=2). The input locations are specified here. Units: meters in projected UTM zone. |
+| SFINCS Input              | sfincs.bzs                       | BZS       | 3-hourly                   | The (slowly varying) water level time series specified per input location. Units: m above reference level. This data is achieved after combining the HYCOM and TPXO data. |
+| SFINCS Input              | sfincs.dis                       | DIS       | 15-minutes                 | The discharge time series specified per input location. Unit: cubic meters per second. |
+| SFINCS Input              | sfincs.ind                       | IND       | N/A                        | Describes the indices of active grid cells within the overall grid. Not used by SFINCS with ASCII input. |
+| SFINCS Input              | sfincs.inp                       | INP       | N/A                        | General input file of SFINCS describing all model settings, the domain, forcing, and structures. |
+| SFINCS Input              | sfincs.msk                       | MSK       | N/A                        | Indicates for every cell whether it is an inactive cell (msk=0), active cell (msk=1), WL boundary cell (msk=2), or outflow boundary cell (msk=3). |
+| SFINCS Input              | sfincs.obs                       | OBS       | N/A                        | Observation points for output time series. Units: meters in projected UTM zone. |
+| SFINCS Input              | sfincs.scs                       | SCS       | N/A                        | Grid-based input using Curve Number method A (without recovery), same structure as `depfile`, binary input. |
+| SFINCS Input              | sfincs.src                       | SRC       | N/A                        | Discharge point coordinates in UTM meters. |
+| SFINCS Input              | sfincs_subgrid.nc                | netCDF    | N/A                        | A netCDF file including all the subgrid information, to run SFINCS. |
+| SFINCS Output              | sfincs_map.nc                    | netCDF    | 10 m, 1-hourly             | SFINCS output file carrying the study area’s spatial visualization data generated by SFINCS. It can be opened by platforms like Quickplot, Panoply, Matlab, Python, etc. Included variables: spatial coordinates, bed level elevation, instantaneous water level, instantaneous water depth, maximum water level and water depth across all timesteps, etc. |
+| SFINCS Output              | sfincs_his.nc                    | netCDF    | 6-minute                   | This contains point-based time series data for specified coordinates in the `sfincs.obs` file. Included variables: spatial coordinates, bed level elevation of observation points, time step of output (it can be different from the `sfincs_map.nc` file), instantaneous water level, instantaneous water depth, etc. |
+| Precipitation             | era5_hourly_data_beryl.nc        | netCDF    | ~31 km, hourly             | Directly downloaded hourly single-level total precipitation data from the ERA5 database. |
+| Precipitation (Processed)             | Precip_2d.nc                     | netCDF    | ~31 km, hourly             | Processed netCDF file originally downloaded from ERA5 data, to be used inside the SFINCS environment. |
+
+---
 
 ## 🌐 Data Sources
 
@@ -97,6 +162,8 @@ All datasets used in this study are publicly available from the following source
   https://waterdata.usgs.gov/nwis
 
 ---
+
+
 
 ## 🧾 Code Overview
 
